@@ -2,17 +2,17 @@
 
 <img src="docs/images/app-icon.png" alt="QTranslate" width="96" height="96">
 
-# QTranslate
+# QTranslate Persian
 
-**The translation tool that Questsoft abandoned. Rebuilt from scratch. Built to last.**
+**Fork of [QTranslate](https://github.com/ahatem/QTranslate) with Persian (`fa`) translation support**
 
-[![Release](https://img.shields.io/github/v/release/ahatem/QTranslate?style=flat-square&color=4A90D9&label=latest)](https://github.com/ahatem/QTranslate/releases/latest)
-[![License](https://img.shields.io/github/license/ahatem/QTranslate?style=flat-square)](LICENSE)
-[![Build](https://img.shields.io/github/actions/workflow/status/ahatem/QTranslate/ci.yml?branch=develop&style=flat-square&label=build)](https://github.com/ahatem/QTranslate/actions)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
+ابزار ترجمه دسکتاپ — با پشتیبانی **ترجمه خودکار به فارسی** (Auto-Detect → Persian)
+
+[![License](https://img.shields.io/github/license/l4tr0d3ctism/QTranslate-Persian?style=flat-square)](LICENSE)
+[![Upstream](https://img.shields.io/badge/upstream-ahatem%2FQTranslate-4A90D9?style=flat-square)](https://github.com/ahatem/QTranslate)
 [![Made with Kotlin](https://img.shields.io/badge/Kotlin-2.x-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org)
 
-[**Download**](#-installation) · [**Plugin Guide**](wiki/Creating-a-Plugin.md) · [**Contributing**](CONTRIBUTING.md) · [**Wiki**](wiki/Home.md)
+[**Build & Run**](#build--run) · [**Persian translation**](#persian-translation-auto--fa) · [**Upstream README**](#about-upstream) · [**Wiki**](wiki/Home.md)
 
 <br>
 
@@ -22,21 +22,74 @@
 
 ---
 
-> **Fork of [ahatem/QTranslate](https://github.com/ahatem/QTranslate)** — this repository adds **Persian (`fa`) translation support**: Auto-Detect source language → translate to Persian (Google Translate plugin). See [Changes in this fork](#changes-in-this-fork).
+## About this fork
+
+This repository is a **fork** of [ahatem/QTranslate](https://github.com/ahatem/QTranslate) — a modern, plugin-based rewrite of the classic Questsoft QTranslate.
+
+Maintained by [@l4tr0d3ctism](https://github.com/l4tr0d3ctism). Original project by [@ahatem](https://github.com/ahatem).
+
+### What we added
+
+| | |
+|---|---|
+| **Persian in Google Translate** | Language code `fa` added to the default Google plugin (was missing upstream) |
+| **Persian OS default** | On a Persian (`fa`) Windows locale, the default **target** language is Persian |
+| **Build mirror** | Aliyun Maven mirror for Google dependencies (when `dl.google.com` is unreachable) |
+
+> **Note:** This fork adds **text translation to Persian**, not a Persian UI. Menus stay in English (or other bundled UI languages from upstream).
+
+### Persian translation (Auto → fa)
+
+1. **Source language:** Auto-Detect  
+2. **Target language:** Persian  
+3. Type or paste text → **Translate**
+
+Works with the bundled **Google Translate**, **Bing**, and **AI** plugins.
 
 ---
 
-## Changes in this fork
+## Build & Run
 
-| Change | Description |
-|--------|-------------|
-| **Persian in Google Translate** | `fa` added to the Google plugin language list (was missing upstream) |
-| **Default target on Persian Windows** | First-run target language is `fa` when the OS locale is Persian |
-| **Build mirror** | Aliyun Maven mirror for Google dependencies (regions where `dl.google.com` is unreachable) |
+**Requires Java 17+** — [Adoptium](https://adoptium.net)
 
-All other features match upstream. UI localization is **not** included — only text translation to Persian.
+```powershell
+git clone -b develop https://github.com/l4tr0d3ctism/QTranslate-Persian.git
+cd QTranslate-Persian
+
+# Windows — set JAVA_HOME if needed
+$env:JAVA_HOME = "C:\Program Files\Java\jdk-17"
+
+.\gradlew.bat :app:shadowJar `
+  :plugins:google-services:shadowJar `
+  :plugins:bing-services:shadowJar `
+  :plugins:ai-services:shadowJar `
+  "-Dorg.gradle.java.home=$env:JAVA_HOME"
+```
+
+Then assemble a portable folder:
+
+```
+QTranslate/
+  ├── QTranslate.jar          ← from app/build/libs/
+  ├── plugins/
+  │     ├── google-services-plugin.jar
+  │     ├── bing-services-plugin.jar
+  │     └── ai-services-plugin.jar
+  ├── languages/              ← copy from repo languages/
+  └── themes/                 ← copy from repo themes/
+```
+
+Run:
+
+```powershell
+java -jar QTranslate.jar
+```
+
+> **Releases:** No pre-built release yet — build from source above. Upstream releases: [ahatem/QTranslate/releases](https://github.com/ahatem/QTranslate/releases)
 
 ---
+
+## About upstream
 
 The original QTranslate by Questsoft was the best desktop translation tool on Windows — until development stopped, APIs broke, and users were left with a dead app.
 
@@ -131,9 +184,11 @@ For longer work: open the main window, type or paste, translate. Switch engines 
 
 ---
 
-## Installation
+## Installation (upstream)
 
 **Requires Java 11 or later** — [download from Adoptium](https://adoptium.net) if you need it.
+
+For **this fork**, see [Build & Run](#build--run) above. For the official upstream build:
 
 1. Download `QTranslate-<version>.zip` from [**Releases**](https://github.com/ahatem/QTranslate/releases/latest)
 2. Unzip anywhere
@@ -261,9 +316,11 @@ Bug fixes, features, translations, docs, and plugins all welcome. Look for [`goo
 
 ---
 
-[MIT License](LICENSE)
+[MIT License](LICENSE) — same as [upstream](https://github.com/ahatem/QTranslate/blob/develop/LICENSE)
 
 <div align="center">
+<br>
+<sub>Fork: <a href="https://github.com/l4tr0d3ctism/QTranslate-Persian">l4tr0d3ctism/QTranslate-Persian</a> · Upstream: <a href="https://github.com/ahatem/QTranslate">ahatem/QTranslate</a></sub>
 <br>
 <sub>Built with Kotlin · FlatLaf · Ktor · Coroutines</sub>
 <br><br>
