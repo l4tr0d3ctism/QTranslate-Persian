@@ -16,7 +16,8 @@
 
 <br>
 
-<img src="docs/images/screenshot-extra-output.png" alt="QTranslate — backward translation and Quick Dictionary" width="720">
+<img src="docs/images/screenshot-persian.jpg" alt="QTranslate — Auto-Detect to Persian translation" width="720">
+<br><sub>Auto-Detect → Persian with Google Translate</sub>
 
 </div>
 
