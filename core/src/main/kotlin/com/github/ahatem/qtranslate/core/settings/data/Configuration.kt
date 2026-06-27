@@ -4,6 +4,7 @@ import com.github.ahatem.qtranslate.api.rewriter.RewriteStyle
 import com.github.ahatem.qtranslate.api.summarizer.SummaryLength
 import com.github.ahatem.qtranslate.core.shared.arch.ServiceType
 import kotlinx.serialization.Serializable
+import java.util.Locale
 import javax.swing.KeyStroke
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -320,6 +321,13 @@ data class Configuration(
         servicePresets.find { it.id == activeServicePresetId }
 
     companion object {
+        /** First-run default target language based on the OS locale (e.g. fa for Persian). */
+        fun defaultTargetLanguageForOs(): String =
+            when (Locale.getDefault().language) {
+                "fa" -> "fa"
+                else -> "en"
+            }
+
         val DEFAULT: Configuration by lazy {
             val defaultPreset = ServicePreset.createDefault()
             Configuration(
@@ -338,6 +346,8 @@ data class Configuration(
                 summaryLength                = SummaryLength.MEDIUM,
                 rewriteStyle                 = RewriteStyle.FORMAL,
                 isRemoveLineBreaksEnabled    = false,
+                preferredTargetLanguage      = defaultTargetLanguageForOs(),
+                preferredSourceLanguage      = "auto",
                 pinnedLanguages              = emptyList(),
                 closeButtonBehavior          = CloseButtonBehavior.ASK,
                 isHistoryEnabled             = true,

@@ -22,6 +22,22 @@
 
 ---
 
+> **Fork of [ahatem/QTranslate](https://github.com/ahatem/QTranslate)** — this repository adds **Persian (`fa`) translation support**: Auto-Detect source language → translate to Persian (Google Translate plugin). See [Changes in this fork](#changes-in-this-fork).
+
+---
+
+## Changes in this fork
+
+| Change | Description |
+|--------|-------------|
+| **Persian in Google Translate** | `fa` added to the Google plugin language list (was missing upstream) |
+| **Default target on Persian Windows** | First-run target language is `fa` when the OS locale is Persian |
+| **Build mirror** | Aliyun Maven mirror for Google dependencies (regions where `dl.google.com` is unreachable) |
+
+All other features match upstream. UI localization is **not** included — only text translation to Persian.
+
+---
+
 The original QTranslate by Questsoft was the best desktop translation tool on Windows — until development stopped, APIs broke, and users were left with a dead app.
 
 This is a full rewrite in Kotlin with one core design change: **everything is a plugin.** Translation engines, OCR, TTS, spell checkers, dictionaries — all separate JARs you install at runtime. When a service changes its API or shuts down, you swap the plugin. The app keeps running.

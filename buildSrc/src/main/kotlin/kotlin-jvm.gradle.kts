@@ -10,9 +10,6 @@ plugins {
 }
 
 kotlin {
-    // Use a specific Java version to make it easier to work in different environments.
-    jvmToolchain(21)
-
     compilerOptions {
         // Target Java 11 bytecode — the output JAR runs on Java 11+.
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)

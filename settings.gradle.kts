@@ -1,7 +1,16 @@
 dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+
+    @Suppress("UnstableApiUsage")
     repositories {
         mavenCentral()
+        // Google Maven mirror (dl.google.com may be unreachable in some regions)
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        google()
+        maven("https://jitpack.io")
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
+        maven("https://central.sonatype.com/repository/maven-snapshots/")
     }
 }
 
